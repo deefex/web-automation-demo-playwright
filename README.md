@@ -72,4 +72,4 @@ This repo demonstrates:
 
 ## References
 - [Playwright Documentation](https://playwright.dev/)
-- [The Internet - Test Pages](https://the-internet.herokuapp.com/)
+- [The Internet - Test Pages](https://the-internet.herokuapp.com/) 
