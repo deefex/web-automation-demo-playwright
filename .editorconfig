@@ -1,0 +1,31 @@
+# EditorConfig helps developers define and maintain consistent coding styles
+# https://editorconfig.org
+
+# Top-most EditorConfig file
+root = true
+
+# Default settings for all files
+[*]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# TypeScript, JavaScript, JSON, YAML
+[*.{ts,js,json,yml,yaml}]
+indent_size = 2
+quote_type = single
+
+# Markdown files — don't strip trailing spaces (they can be meaningful)
+[*.md]
+trim_trailing_whitespace = false
+
+# YAML (GitHub Actions, configs)
+[*.yml]
+indent_size = 2
+
+# Package and config files
+[package.json]
+indent_size = 2
