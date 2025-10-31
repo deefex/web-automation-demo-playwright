@@ -37,7 +37,7 @@ jobs:
         with:
           name: playwright-report
           path: playwright-report/
-          retention-days: 30
+          retention-days: 10
 
       # 7. Optional: Display link to HTML report in GitHub Actions summary
       - name: Show Playwright report link
