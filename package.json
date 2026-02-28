@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint --ext .ts ."
+    "lint": "eslint --ext .ts .",
+    "typecheck": "tsc --noEmit",
+    "test:e2e": "playwright test"
   },
   "keywords": [],
   "author": "",

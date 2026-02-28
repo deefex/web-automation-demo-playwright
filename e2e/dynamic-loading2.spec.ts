@@ -14,7 +14,7 @@ test.describe('Dynamic Loading 2', () => {
   });
 
   test('"Hello World!" message is not visible by default', async () => {
-    expect(await dynamicPage.isVisible()).toBe(false);
+    await expect(dynamicPage.message).toBeHidden();
   });
 
   test('clicking Start makes the message exist', async () => {
@@ -26,6 +26,6 @@ test.describe('Dynamic Loading 2', () => {
   test('clicking Start makes the message visible', async () => {
     await dynamicPage.clickStart();
     await dynamicPage.waitForMessage();
-    expect(await dynamicPage.isVisible()).toBe(true);
+    await expect(dynamicPage.message).toBeVisible();
   });
 });

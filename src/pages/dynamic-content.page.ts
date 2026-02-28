@@ -24,13 +24,13 @@ export class DynamicContentPage extends BasePage {
 
   async getRowText(row: number): Promise<string> {
     // Select the row by nth-of-type
-    const rowLocator = this.page.locator(`#content > div.row`).nth(row - 1);
+    const rowLocator = this.page.locator('#content > div.row').nth(row - 1);
     const textLocator = rowLocator.locator('div.large-10.columns');
     return (await textLocator.first().textContent())?.trim() || '';
   }
 
   async getRowImageSrc(row: number): Promise<string> {
-    const rowLocator = this.page.locator(`#content > div.row`).nth(row - 1);
+    const rowLocator = this.page.locator('#content > div.row').nth(row - 1);
     const imgLocator = rowLocator.locator('img');
     return (await imgLocator.first().getAttribute('src')) || '';
   }

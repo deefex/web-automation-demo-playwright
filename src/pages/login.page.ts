@@ -1,6 +1,6 @@
 import { BasePage } from './base.page';
 import { expect } from '@playwright/test';
-import { SecurePage } from './secure.page.';
+import { SecurePage } from  './secure.page';
 
 export class LoginPage extends BasePage {
   private usernameInput = this.page.locator('#username');

@@ -33,7 +33,19 @@ export default [
       'playwright/no-skipped-test': 'warn',
       'playwright/no-focused-test': 'error',
       'playwright/no-conditional-in-test': 'off',
-      'playwright/expect-expect': ['warn', { assertFunctionNames: ['expect', 'assertLoginSuccess', 'assertInvalidLogin', 'assertSuccessfulLogin'] }],
+      'playwright/expect-expect': [
+        'warn',
+        {
+          assertFunctionNames: [
+            'expect',
+            'assertLoginSuccess',
+            'assertInvalidLogin',
+            'assertSuccessfulLogin',
+            'expectCheckboxState',
+            'expectColumnHeaders',
+          ],
+        },
+      ],
     },
   },
 ];

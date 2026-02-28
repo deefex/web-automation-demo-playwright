@@ -1,7 +1,10 @@
 import { Page, expect } from '@playwright/test';
 
 export class BasePage {
-  constructor(protected page: Page, protected baseUrl: string = process.env.BASE_URL || '') {}
+  constructor(
+    protected page: Page,
+    protected baseUrl: string = process.env.BASE_URL || 'https://the-internet.herokuapp.com'
+  ) {}
 
   async open(path: string): Promise<void> {
     const url = path.startsWith('http') ? path : `${this.baseUrl}${path}`;

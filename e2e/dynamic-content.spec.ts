@@ -9,10 +9,6 @@ test.describe('Dynamic Content', () => {
   const ROW2_TXT =
     'Omnis fugiat porro vero quas tempora quis eveniet ab officia cupiditate culpa repellat debitis itaque possimus odit dolorum et iste quibusdam quis dicta autem sint vel quo vel consequuntur dolorem nihil neque sunt aperiam blanditiis.';
 
-  // optional static image checks
-  const ROW1_IMG = '/img/avatars/Original-Facebook-Geek-Profile-Avatar-2.jpg';
-  const ROW2_IMG = '/img/avatars/Original-Facebook-Geek-Profile-Avatar-7.jpg';
-
   test.beforeEach(async ({ page }) => {
     dynamicContentPage = new DynamicContentPage(page);
     await dynamicContentPage.openDynamicContentPage();
@@ -28,14 +24,15 @@ test.describe('Dynamic Content', () => {
     expect(row2Text).toBe(ROW2_TXT);
   });
 
-  // Optional (can be flaky if herokuapp content changes)
-  test.skip('the image in the 1st row is as per the static page settings', async () => {
+  test('the image in the 1st row should use an avatar path', async () => {
     const src = await dynamicContentPage.getRowImageSrc(1);
-    expect(src).toContain(ROW1_IMG);
+    expect(src).toContain('/img/avatars/');
+    expect(src).toMatch(/\.(jpg|jpeg|png)$/i);
   });
 
-  test.skip('the image in the 2nd row is as per the static page settings', async () => {
+  test('the image in the 2nd row should use an avatar path', async () => {
     const src = await dynamicContentPage.getRowImageSrc(2);
-    expect(src).toContain(ROW2_IMG);
+    expect(src).toContain('/img/avatars/');
+    expect(src).toMatch(/\.(jpg|jpeg|png)$/i);
   });
 });

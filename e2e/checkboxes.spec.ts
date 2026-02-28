@@ -1,5 +1,6 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import { CheckboxesPage } from '../src/pages/checkboxes.page';
+import { expectCheckboxState } from '../src/helpers/assertions';
 
 test.describe('Checkboxes', () => {
   let checkboxesPage: CheckboxesPage;
@@ -10,20 +11,20 @@ test.describe('Checkboxes', () => {
   });
 
   test('the first checkbox should be unchecked by default', async () => {
-    await expect(checkboxesPage.checkbox1).not.toBeChecked();
+    await expectCheckboxState(checkboxesPage.checkbox1, false);
   });
 
   test('the second checkbox should be checked by default', async () => {
-    await expect(checkboxesPage.checkbox2).toBeChecked();
+    await expectCheckboxState(checkboxesPage.checkbox2, true);
   });
 
   test('the first checkbox should be checked after clicking it', async () => {
     await checkboxesPage.checkbox1.click();
-    await expect(checkboxesPage.checkbox1).toBeChecked();
+    await expectCheckboxState(checkboxesPage.checkbox1, true);
   });
 
   test('the second checkbox should be unchecked after clicking it', async () => {
     await checkboxesPage.checkbox2.click();
-    await expect(checkboxesPage.checkbox2).not.toBeChecked();
+    await expectCheckboxState(checkboxesPage.checkbox2, false);
   });
 });

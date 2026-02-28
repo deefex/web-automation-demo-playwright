@@ -1,4 +1,5 @@
 # Web Automation Demo – Playwright + TypeScript
+[![Playwright Tests](https://github.com/deefex/web-automation-demo-playwright/actions/workflows/playwright.yml/badge.svg?branch=main)](https://github.com/deefex/web-automation-demo-playwright/actions/workflows/playwright.yml)
 
 This repository demonstrates modern **end-to-end web automation** using [Playwright](https://playwright.dev/) with **TypeScript**.  
 It is designed as a **portfolio showcase** to highlight best practices in test automation, OOP design, and maintainable architecture.
@@ -49,7 +50,8 @@ The following pages and functionalities are automated:
 src/
 - pages/        # Page Object classes (BasePage, LoginPage, SecurePage, etc.)
 - testdata/     # Centralized test data (credentials, inputs)
-- fixtures/     # Optional reusable fixtures
+- fixtures/     # Reusable fixtures (e.g. login/auth)
+- helpers/      # Reusable assertion/action helpers
 
 e2e/
 - *.spec.ts # Test specifications
@@ -72,14 +74,56 @@ npm install
 npx playwright test
 ```
 
+### Base URL
+If `BASE_URL` is not set, tests default to:
+```bash
+https://the-internet.herokuapp.com
+```
+
+### Lint and type-check
+```bash
+npm run lint
+npm run typecheck
+```
+
 ### View reports
 ```bash
 npx playwright show-report
 ```
 
+## CI Pipeline
+GitHub Actions runs this sequence on push and pull request:
+- `npm ci`
+- `npm run lint`
+- `npm run typecheck`
+- `npm run test:e2e`
+
+The Playwright HTML report is uploaded as a workflow artifact.
+
+## Fixtures
+This project uses scoped fixtures where preconditions are needed:
+- `loginPage` fixture opens `/login` for invalid-login tests
+- `authenticatedPage` fixture logs in with valid credentials
+
+See:
+- `src/fixtures/auth.fixtures.ts`
+- `e2e/login.spec.ts`
+
+## Helpers
+Small helper assertions reduce repeated detail while keeping specs readable:
+- `expectCheckboxState(locator, checked)`
+- `expectColumnHeaders(headers, expected)`
+
+See:
+- `src/helpers/assertions.ts`
+- `e2e/checkboxes.spec.ts`
+- `e2e/drag-and-drop.spec.ts`
+
 ## Featured Highlights
 - Page Object Models: BasePage + LoginPage + SecurePage
 - Reusable test data: centralized in src/testdata/credentials.ts
+- Fixtures: login/auth fixture pattern in src/fixtures/auth.fixtures.ts
+- Helpers: reusable assertions in src/helpers/assertions.ts
 - Assertions: built-in Playwright assertions (expect)
 - Async-safe methods: all actions are properly awaited
 - CI Integration: GitHub Actions workflow runs tests across Chromium, Firefox, and WebKit

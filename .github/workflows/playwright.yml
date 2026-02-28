@@ -18,20 +18,30 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
+          cache: npm
 
       # 3. Install dependencies
       - name: Install dependencies
         run: npm ci
 
-      # 4. Install Playwright browsers
+      # 4. Lint and type-check
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run TypeScript type-check
+        run: npm run typecheck
+
+      # 5. Install Playwright browsers
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      # 5. Run Playwright tests
+      # 6. Run Playwright tests
       - name: Run Playwright tests
-        run: npx playwright test --reporter=html
+        run: npm run test:e2e -- --reporter=html
+        env:
+          BASE_URL: https://the-internet.herokuapp.com
 
-      # 6. Upload Playwright HTML report as artifact
+      # 7. Upload Playwright HTML report as artifact
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
@@ -39,7 +49,7 @@ jobs:
           path: playwright-report/
           retention-days: 10
 
-      # 7. Optional: Display link to HTML report in GitHub Actions summary
+      # 8. Optional: Display link to HTML report in GitHub Actions summary
       - name: Show Playwright report link
         if: ${{ always() }}
         run: |
